@@ -10,6 +10,13 @@ $(document).ready(() => {
 				client_secret: '6434e7d1c1ef9d9f53c46a4e8a3e250d6db79a71',
 			},
 		}).done(user => {
+			$.ajax({
+				url: `https://api.github.com/users/${username}/repos/`,
+				data: {
+					client_id: '1539bf3f90f958c63330',
+					client_secret: '6434e7d1c1ef9d9f53c46a4e8a3e250d6db79a71',
+				},
+			}).done(repos => {});
 			$('#profile').html(`
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -22,11 +29,24 @@ $(document).ready(() => {
                 <a target="_blank" class="btn btn-primary btn-block" href="${user.html_url}">View Profile</a>
               </div>
               <div class="col-md-9">
-                
+                <span class="label label-default">Public Repos: ${user.public_repos}</span>
+                <span class="label label-primary">Public Gists: ${user.public_gists}</span>
+                <span class="label label-success">Followers: ${user.followers}</span>
+                <span class="label label-info">Following: ${user.following}</span>
+                <br/>
+                <br/>
+                <ul class="list-group">
+                  <li class="list-group-tem">Website/blog: ${user.blog}</li>
+                  <li class="list-group-tem">Location: ${user.location}</li>
+                  <li class="list-group-tem">Company: ${user.company}</li>
+                  <li class="list-group-tem">Member Since: ${user.created_at}</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
+        <h3 class="page-header">Latest Repos</h3>
+        <div id="repos"></div>
       `);
 		});
 	});
