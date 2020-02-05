@@ -16,7 +16,25 @@ $(document).ready(() => {
 					client_id: '1539bf3f90f958c63330',
 					client_secret: '6434e7d1c1ef9d9f53c46a4e8a3e250d6db79a71',
 				},
-			}).done(repos => {});
+			}).done(repos => {
+				repos.each((index, repo) => {
+					$('#repos').append(`
+            <div class="well">
+              <div class="row">
+                <div class="col-md-7">
+                  <strong>${repo.name}</strong>
+                </div>
+                <div class="col-md-3">
+                
+                </div>
+                <div class="col-md-2">
+                
+                </div>
+              </div>
+            </div>
+          `);
+				});
+			});
 			$('#profile').html(`
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -25,7 +43,7 @@ $(document).ready(() => {
           <div class="panel-body">
             <div class="row">
               <div class="col-md-3">
-                <img class="thumbnail" src="${user.avatar_url}">
+                <img class="img-thumbnail avatar" src="${user.avatar_url}">
                 <a target="_blank" class="btn btn-primary btn-block" href="${user.html_url}">View Profile</a>
               </div>
               <div class="col-md-9">
@@ -36,10 +54,10 @@ $(document).ready(() => {
                 <br/>
                 <br/>
                 <ul class="list-group">
-                  <li class="list-group-tem">Website/blog: ${user.blog}</li>
-                  <li class="list-group-tem">Location: ${user.location}</li>
-                  <li class="list-group-tem">Company: ${user.company}</li>
-                  <li class="list-group-tem">Member Since: ${user.created_at}</li>
+                  <li class="list-group-item">Website/blog: ${user.blog}</li>
+                  <li class="list-group-item">Location: ${user.location}</li>
+                  <li class="list-group-item">Company: ${user.company}</li>
+                  <li class="list-group-item">Member Since: ${user.created_at}</li>
                 </ul>
               </div>
             </div>
